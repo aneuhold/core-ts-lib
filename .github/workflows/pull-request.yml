@@ -10,6 +10,9 @@ jobs:
   buildAndTest:
     name: 'Build and Test'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -41,3 +44,6 @@ jobs:
 
       - name: Run Linting
         run: yarn lint
+
+      - name: Dry run publish to JSR
+        run: npx jsr publish --dry-run
