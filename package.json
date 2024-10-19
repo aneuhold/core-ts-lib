@@ -7,7 +7,7 @@
   "packageManager": "yarn@4.5.0",
   "scripts": {
     "bump": "tsx ./scripts/bumpVersion.ts",
-    "build": "tsc",
+    "build": "rimraf ./lib && tsc --project tsconfig.build.json",
     "test": "jest",
     "lint": "eslint",
     "jsr:add": "yarn dlx jsr add",
