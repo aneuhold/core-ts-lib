@@ -18,4 +18,17 @@ export default class ErrorUtils {
   static throwError(errorMessage: string, erroneousObject: object) {
     ErrorUtils.throwErrorList([errorMessage], erroneousObject);
   }
+
+  /**
+   * Gets the error string from an unknown error object.
+   */
+  static getErrorString(error: unknown): string {
+    if (error instanceof Error) {
+      return error.message;
+    } else if (typeof error === 'string') {
+      return error;
+    } else {
+      return JSON.stringify(error);
+    }
+  }
 }
