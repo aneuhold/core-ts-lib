@@ -8,8 +8,10 @@
   "scripts": {
     "bump": "tsx ./scripts/bumpVersion.ts",
     "build": "rimraf ./lib && tsc --project tsconfig.build.json",
-    "test": "jest",
     "lint": "eslint",
+    "test": "jest",
+    "jsr:validate": "npx jsr publish --dry-run",
+    "checkAll": "yarn build && yarn lint && yarn test && yarn jsr:validate",
     "jsr:add": "yarn dlx jsr add",
     "link:local": "yarn link",
     "unlink:local": "yarn unlink",
