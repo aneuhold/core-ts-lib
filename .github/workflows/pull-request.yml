@@ -46,4 +46,4 @@ jobs:
         run: yarn lint
 
       - name: Dry run publish to JSR
-        run: npx jsr publish --dry-run
+        run: yarn jsr:validate

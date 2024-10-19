@@ -12,6 +12,7 @@
     "test": "jest",
     "jsr:validate": "jsr publish --dry-run",
     "checkAll": "yarn build && yarn lint && yarn test && yarn jsr:validate",
+    "jsr:publish": "jsr publish",
     "jsr:add": "yarn dlx jsr add",
     "link:local": "yarn link",
     "unlink:local": "yarn unlink",

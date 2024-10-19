@@ -36,8 +36,5 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Build
-        run: yarn build
-
       - name: Publish to JSR
-        run: npx jsr publish
+        run: yarn jsr:publish
