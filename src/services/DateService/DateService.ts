@@ -66,7 +66,7 @@ export default class DateService {
    * Gets the last day of the month for the provided date. This will retain the
    * time that was provided in the date.
    */
-  static getLastDayOfGivenMonth(date: Date) {
+  static getLastDayOfGivenMonth(date: Date): Date {
     // Setting the day to 0, makes the date move to the last day of the
     // previous month.
     const newDate = new Date(date);
