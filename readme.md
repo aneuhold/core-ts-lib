@@ -34,13 +34,13 @@ export default function logSomething() {
 
 1. Create a new branch locally
 1. Make some changes locally
-1. Run `yarn bump`
+1. Run `yarn version patch`
 1. Push the branch up to a PR to make sure it passes checks
 1. Once it passes checks, merge the PR and it will automatically get deployed.
 
 ### Updating via Push to Main
 
 1. Make changes locally
-2. Run `yarn bump`
+2. Run `yarn version patch`
 3. Run `yarn checkAll`
 4. Push it up to main. This will get automatically deployed.

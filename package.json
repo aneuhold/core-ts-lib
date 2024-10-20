@@ -6,11 +6,10 @@
   "types": "lib/index.d.ts",
   "packageManager": "yarn@4.5.0",
   "scripts": {
-    "bump": "tsx ./scripts/bumpVersion.ts",
     "tscheck": "tsc --project tsconfig.build.json --noEmit",
     "lint": "eslint",
     "test": "jest",
-    "jsr:validate": "tsx ./scripts/updateJsrVersion.ts && jsr publish --dry-run",
+    "jsr:validate": "tsx ./scripts/validateJsrPublish.ts",
     "checkAll": "yarn tscheck && yarn lint && yarn test && yarn jsr:validate",
     "jsr:publish": "tsx ./scripts/updateJsrVersion.ts && jsr publish",
     "link:local": "yarn link",
