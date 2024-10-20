@@ -153,4 +153,43 @@ export default class DependencyService {
     await updateVersion(path.join(rootDir, 'package.json'));
     await updateVersion(path.join(rootDir, 'jsr.json'));
   }
+
+  static async updateJsrFromPackageJson(): Promise<void> {
+    const rootDir = process.cwd();
+    const packageJsonPath = path.join(rootDir, 'package.json');
+    const jsrJsonPath = path.join(rootDir, 'jsr.json');
+
+    try {
+      await access(packageJsonPath);
+    } catch {
+      Logger.error('No package.json file found in the current directory.');
+      return;
+    }
+
+    try {
+      await access(jsrJsonPath);
+    } catch {
+      Logger.error('No jsr.json file found in the current directory.');
+      return;
+    }
+
+    try {
+      const packageJsonData = JSON.parse(
+        await readFile(packageJsonPath, 'utf-8')
+      ) as PackageJson;
+      const jsrJsonData = JSON.parse(
+        await readFile(jsrJsonPath, 'utf-8')
+      ) as JsonWithVersionProperty;
+      jsrJsonData.version = packageJsonData.version;
+      await writeFile(jsrJsonPath, JSON.stringify(jsrJsonData, null, 2));
+      Logger.info(
+        'Updated jsr.json from package.json to version ' + jsrJsonData.version
+      );
+    } catch (error) {
+      const errorString = ErrorUtils.getErrorString(error);
+      Logger.error(
+        `Failed to update jsr.json from package.json: ${errorString}`
+      );
+    }
+  }
 }
