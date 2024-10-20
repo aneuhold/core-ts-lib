@@ -30,6 +30,8 @@ export default class PackageService {
     await PackageService.revertGitChanges();
     if (!successfulDryRun) {
       process.exit(1);
+    } else {
+      Logger.success('Successfully validated JSR publishing.');
     }
   }
 
