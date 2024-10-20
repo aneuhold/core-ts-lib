@@ -35,6 +35,21 @@ export default class PackageService {
     }
   }
 
+  static async publishToJsr(): Promise<void> {
+    if (await FileSystemService.hasPendingChanges()) {
+      Logger.error('Please commit or stash your changes before publishing.');
+      process.exit(1);
+    }
+    await PackageService.updateJsrFromPackageJson();
+    const result = await PackageService.publishJsr();
+    await PackageService.revertGitChanges();
+    if (!result) {
+      process.exit(1);
+    } else {
+      Logger.success('Successfully published to JSR.');
+    }
+  }
+
   static async updateJsrFromPackageJson(): Promise<void> {
     const rootDir = process.cwd();
     const packageJsonPath = path.join(rootDir, 'package.json');
@@ -95,6 +110,27 @@ export default class PackageService {
         `Failed to run 'jsr publish --dry-run': ${ErrorUtils.getErrorString(error)}`
       );
       return false;
+    }
+    return true;
+  }
+
+  /**
+   * Publishes the current project to JSR.
+   *
+   * @returns true if the publish was successful, false otherwise.
+   */
+  private static async publishJsr(): Promise<boolean> {
+    Logger.info('Running `jsr publish`');
+    try {
+      const { stdout, stderr } = await execAsync('jsr publish --allow-dirty');
+      if (stderr) {
+        Logger.info(stderr);
+      }
+      Logger.info(stdout);
+    } catch (error) {
+      Logger.error(
+        `Failed to run 'jsr publish': ${ErrorUtils.getErrorString(error)}`
+      );
     }
     return true;
   }
