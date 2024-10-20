@@ -96,7 +96,9 @@ export default class PackageService {
   private static async publishJsrDryRun(): Promise<boolean> {
     Logger.info('Running `jsr publish --dry-run`');
     try {
-      const { stdout, stderr } = await execAsync('jsr publish --allow-dirty');
+      const { stdout, stderr } = await execAsync(
+        'jsr publish --allow-dirty --dry-run'
+      );
       if (stderr) {
         Logger.info(stderr);
       }
