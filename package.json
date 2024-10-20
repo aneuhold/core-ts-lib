@@ -11,7 +11,7 @@
     "test": "jest",
     "jsr:validate": "tsx ./scripts/validateJsrPublish.ts",
     "checkAll": "yarn tscheck && yarn lint && yarn test && yarn jsr:validate",
-    "jsr:publish": "tsx ./scripts/updateJsrVersion.ts && jsr publish",
+    "jsr:publish": "tsx ./scripts/publishJsr.ts",
     "link:local": "yarn link",
     "unlink:local": "yarn unlink",
     "upgrade:all": "yarn up"
