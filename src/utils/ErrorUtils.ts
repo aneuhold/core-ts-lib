@@ -1,3 +1,6 @@
+/**
+ * Some utility functions for handling errors.
+ */
 export default class ErrorUtils {
   /**
    * Throws an array of errors in a formatted list.
