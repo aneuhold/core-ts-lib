@@ -5,6 +5,7 @@ import DependencyService, {
   VersionType
 } from './services/DependencyService.js';
 import FileSystemService from './services/FileSystemService/FileSystemService.js';
+import PackageService from './services/PackageService.js';
 import StringService from './services/StringService.js';
 import ErrorUtils from './utils/ErrorUtils.js';
 import Logger from './utils/Logger.js';
@@ -18,6 +19,7 @@ export {
   ErrorUtils,
   FileSystemService,
   Logger,
+  PackageService,
   sleep,
   StringService,
   TestUtils
