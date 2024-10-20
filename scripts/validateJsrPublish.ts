@@ -1,8 +1,8 @@
 import PackageService from '../src/services/PackageService.js';
 
 /**
- * Bumps the version of the json files that have one. This is as a separate
- * script and not using main-scripts to avoid a circular dependency.
+ * Validates JSR. This is a separate script here, but it will be integrated
+ * into main-scripts.
  */
 async function validateJsr() {
   await PackageService.validateJsrPublish();
