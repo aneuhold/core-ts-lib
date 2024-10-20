@@ -35,7 +35,7 @@ export default class FileSystemService {
     folderPath: string,
     fileName: string,
     textToInsert: string
-  ) {
+  ): Promise<void> {
     const filePath = path.join(folderPath, fileName);
 
     await FileSystemService.checkOrCreateFolder(folderPath);

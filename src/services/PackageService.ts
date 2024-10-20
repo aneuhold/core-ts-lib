@@ -26,7 +26,11 @@ export default class PackageService {
       process.exit(1);
     }
     await PackageService.updateJsrFromPackageJson();
-    await PackageService.publishJsrDryRun();
+    const successfulDryRun = await PackageService.publishJsrDryRun();
+    await PackageService.revertGitChanges();
+    if (!successfulDryRun) {
+      process.exit(1);
+    }
   }
 
   static async updateJsrFromPackageJson(): Promise<void> {
@@ -68,7 +72,11 @@ export default class PackageService {
     }
   }
 
-  private static async publishJsrDryRun(): Promise<void> {
+  /**
+   * Executes a dry run of JSR publishing. Returns true if the dry run was
+   * successful, false otherwise.
+   */
+  private static async publishJsrDryRun(): Promise<boolean> {
     Logger.info('Running `jsr publish --dry-run`');
     try {
       const { stdout, stderr } = await execAsync(
@@ -76,13 +84,16 @@ export default class PackageService {
       );
       if (stderr) {
         Logger.error(stderr);
+        return false;
       }
       Logger.info(stdout);
     } catch (error) {
       Logger.error(
         `Failed to run 'jsr publish --dry-run': ${ErrorUtils.getErrorString(error)}`
       );
+      return false;
     }
+    return true;
   }
 
   private static async revertGitChanges(): Promise<void> {
