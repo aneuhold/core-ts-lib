@@ -84,9 +84,10 @@ export default class PackageService {
       const { stdout, stderr } = await execAsync(
         'jsr publish --dry-run --allow-dirty'
       );
+      // This doesn't seem to actually indicate an error. It seems that it
+      // will throw if there is really an error.
       if (stderr) {
-        Logger.error(stderr);
-        return false;
+        Logger.info(stderr);
       }
       Logger.info(stdout);
     } catch (error) {
