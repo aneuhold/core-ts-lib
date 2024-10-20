@@ -24,7 +24,7 @@ __metadata:
     "@types/node": "npm:^20.16.10"
     eslint: "npm:^9.13.0"
     jest: "npm:^29.7.0"
-    jsr: "npm:^0.13.2"
+    jsr: "npm:*"
     prettier: "npm:^3.3.3"
     rimraf: "npm:^6.0.1"
     ts-jest: "npm:^29.2.5"
@@ -4349,7 +4349,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsr@npm:^0.13.2":
+"jsr@npm:*":
   version: 0.13.2
   resolution: "jsr@npm:0.13.2"
   dependencies:
