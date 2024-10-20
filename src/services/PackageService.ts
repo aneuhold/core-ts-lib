@@ -8,7 +8,6 @@ import { JsonWithVersionProperty, PackageJson } from './DependencyService.js';
 import FileSystemService from './FileSystemService/FileSystemService.js';
 
 const execAsync = promisify(exec);
-const spawnAsync = promisify(spawn);
 
 /**
  * A service which can be used to assist in publishing or validating packages
@@ -118,18 +117,20 @@ export default class PackageService {
    */
   private static async publishJsr(): Promise<boolean> {
     Logger.info('Running `jsr publish`');
-    try {
-      await spawnAsync('jsr publish', ['--allow-dirty'], {
+    return new Promise((resolve) => {
+      const child = spawn('jsr publish', ['--allow-dirty'], {
         stdio: 'inherit',
         shell: true
       });
-    } catch (error) {
-      Logger.error(
-        `Failed to run 'jsr publish': ${ErrorUtils.getErrorString(error)}`
-      );
-      return false;
-    }
-    return true;
+
+      child.on('exit', (code) => {
+        if (code === 0) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   }
 
   private static async revertGitChanges(): Promise<void> {
