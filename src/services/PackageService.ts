@@ -97,10 +97,11 @@ export default class PackageService {
   private static async publishJsrDryRun(): Promise<boolean> {
     Logger.info('Running `jsr publish --dry-run`');
     try {
-      await spawnAsync('jsr publish', ['--dry-run', '--allow-dirty'], {
-        shell: true,
-        stdio: 'inherit'
-      });
+      const { stdout, stderr } = await execAsync('jsr publish --allow-dirty');
+      if (stderr) {
+        Logger.info(stderr);
+      }
+      Logger.info(stdout);
     } catch (error) {
       Logger.error(
         `Failed to run 'jsr publish --dry-run': ${ErrorUtils.getErrorString(error)}`
@@ -118,15 +119,15 @@ export default class PackageService {
   private static async publishJsr(): Promise<boolean> {
     Logger.info('Running `jsr publish`');
     try {
-      const { stdout, stderr } = await execAsync('jsr publish --allow-dirty');
-      if (stderr) {
-        Logger.info(stderr);
-      }
-      Logger.info(stdout);
+      await spawnAsync('jsr publish', ['--allow-dirty'], {
+        stdio: 'inherit',
+        shell: true
+      });
     } catch (error) {
       Logger.error(
         `Failed to run 'jsr publish': ${ErrorUtils.getErrorString(error)}`
       );
+      return false;
     }
     return true;
   }
