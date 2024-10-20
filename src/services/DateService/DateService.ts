@@ -159,7 +159,7 @@ export default class DateService {
    * over or under the number of days in the month, then the month will be
    * adjusted accordingly.
    */
-  static addDays(date: Date, days: number): Date {
+  static addDays(date: Date, days: number) {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + days);
     return newDate;
