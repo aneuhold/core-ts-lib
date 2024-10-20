@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, spawn } from 'child_process';
 import { access, readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import { promisify } from 'util';
@@ -8,6 +8,7 @@ import { JsonWithVersionProperty, PackageJson } from './DependencyService.js';
 import FileSystemService from './FileSystemService/FileSystemService.js';
 
 const execAsync = promisify(exec);
+const spawnAsync = promisify(spawn);
 
 /**
  * A service which can be used to assist in publishing or validating packages
@@ -96,15 +97,10 @@ export default class PackageService {
   private static async publishJsrDryRun(): Promise<boolean> {
     Logger.info('Running `jsr publish --dry-run`');
     try {
-      const { stdout, stderr } = await execAsync(
-        'jsr publish --dry-run --allow-dirty'
-      );
-      // This doesn't seem to actually indicate an error. It seems that it
-      // will throw if there is really an error.
-      if (stderr) {
-        Logger.info(stderr);
-      }
-      Logger.info(stdout);
+      await spawnAsync('jsr publish', ['--dry-run', '--allow-dirty'], {
+        shell: true,
+        stdio: 'inherit'
+      });
     } catch (error) {
       Logger.error(
         `Failed to run 'jsr publish --dry-run': ${ErrorUtils.getErrorString(error)}`
