@@ -40,7 +40,7 @@
     "Node.js"
   ],
   "devDependencies": {
-    "@aneuhold/eslint-config": "^1.0.35",
+    "@aneuhold/eslint-config": "^1.0.37",
     "@types/jest": "^29.5.13",
     "@types/node": "^20.16.13",
     "eslint": "^9.13.0",
