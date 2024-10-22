@@ -11,7 +11,7 @@
     "lint": "eslint",
     "test": "jest",
     "jsr:validate": "tsx ./scripts/validateJsrPublish.ts",
-    "checkAll": "yarn tscheck && yarn lint && yarn test && yarn jsr:validate",
+    "checkAll": "yarn build && yarn lint && yarn test && yarn jsr:validate",
     "jsr:publish": "tsx ./scripts/publishJsr.ts",
     "upgrade:all": "yarn up"
   },
