@@ -38,3 +38,12 @@ jobs:
 
       - name: Publish to JSR
         run: yarn jsr:publish
+
+      - name: Run build
+        run: yarn build
+
+      - name: Add Auth Token for npm
+        run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
+
+      - name: Publish to NPM
+        run: npm publish --access public
