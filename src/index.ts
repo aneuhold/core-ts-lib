@@ -3,7 +3,7 @@ import { ILogger } from './interfaces/ILogger.js';
 import { ITracer } from './interfaces/ITracer.js';
 import ArrayService from './services/ArrayService.js';
 import DateService from './services/DateService/DateService.js';
-import { DependencyRegistry } from './services/DependencyRegistry.js';
+import { DependencyRegistry, DR } from './services/DependencyRegistry.js';
 import DependencyService, {
   VersionType
 } from './services/DependencyService.js';
@@ -19,6 +19,7 @@ export {
   DateService,
   DependencyRegistry,
   DependencyService,
+  DR,
   ErrorUtils,
   FileSystemService,
   PackageService,

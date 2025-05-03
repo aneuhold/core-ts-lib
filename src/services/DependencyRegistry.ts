@@ -51,3 +51,8 @@ export class DependencyRegistry {
     return this.tracerInstance;
   }
 }
+
+/**
+ * Alias for DependencyRegistry for more succinct usage.
+ */
+export const DR = DependencyRegistry;
