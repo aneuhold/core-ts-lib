@@ -2,9 +2,9 @@
   "name": "@aneuhold/core-ts-lib",
   "author": "Anton G. Neuhold Jr.",
   "license": "MIT",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "A core library for all of my TypeScript projects",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.9.1",
   "type": "module",
   "scripts": {
     "build": "rimraf lib && tsc --project tsconfig.build.json && tsx ./scripts/copyTsFiles.ts",
